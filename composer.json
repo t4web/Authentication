@@ -1,0 +1,32 @@
+{
+    "name": "t4web/Authentication",
+    "description": "A generic user authentication module for ZF2.",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2"
+    ],
+    "homepage": "https://github.com/t4web/Authentication",
+    "authors": [
+        {
+            "name": "Max Gulturyan",
+            "email": "gulturyan@gmail.com",
+            "homepage": "http://about.me/maxgu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-authentication": "~2.1"
+    },
+    "require-dev" : {
+        "phpunit/phpunit" : ">=3.7,<4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Authentication": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
