@@ -1,5 +1,5 @@
 {
-    "name": "t4web/Authentication",
+    "name": "t4web/authentication",
     "description": "A generic user authentication module for ZF2.",
     "type": "library",
     "license": "BSD-3-Clause",
