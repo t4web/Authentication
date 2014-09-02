@@ -16,6 +16,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
+        "zendframework/zend-modulemanager": "~2.1",
         "zendframework/zend-authentication": "~2.1"
     },
     "require-dev" : {
@@ -24,6 +25,9 @@
     "autoload": {
         "psr-0": {
             "Authentication": "src/"
-        }
+        },
+        "classmap": [
+            "./Module.php"
+        ]
     }
 }
