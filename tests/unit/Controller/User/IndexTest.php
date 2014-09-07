@@ -11,10 +11,14 @@ class IndexTest extends \Codeception\TestCase\Test
     protected $tester;
 
     private $controller;
+    private $authService;
 
     protected function _before()
     {
-        $this->controller = new IndexController();
+        $this->authService = $this->getMockBuilder('Authentication\Service')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->controller = new IndexController($this->authService);
     }
 
     protected function _after()

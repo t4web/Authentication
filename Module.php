@@ -1,12 +1,15 @@
 <?php
-
 namespace Authentication;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\Mvc\Controller\ControllerManager;
+use Zend\ServiceManager\ServiceManager;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ControllerProviderInterface
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ControllerProviderInterface,
+                        ServiceProviderInterface
 {
     public function getConfig($env = null)
     {
@@ -27,12 +30,29 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Co
         );
     }
 
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Authentication\Service' => function (ServiceManager $sm) {
+                        return new Service();
+                    },
+            )
+        );
+    }
+
     public function getControllerConfig()
     {
         return array(
-            'invokables' => array(
-                'Authentication\Controller\User\Index' => 'Authentication\Controller\User\IndexController',
-            ),
+            'factories' => array(
+                'Authentication\Controller\User\Index' => function (ControllerManager $cm) {
+                        $sl = $cm->getServiceLocator();
+
+                        return new Controller\User\IndexController(
+                            $sl->get('Authentication\Service')
+                        );
+                    },
+            )
         );
     }
 }
