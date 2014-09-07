@@ -50,3 +50,18 @@ Installation
         // ...
     );
     ```
+Testing
+------------
+Unit test runnig from box.
+    ```bash
+    $ codeception run unit
+    ```
+For running Functional tests create symbolic link to functional test directory:
+    ```bash
+    $ cd /root/path/to/zf/project
+    $ ln -s /root/path/to/zf/project/vendor/t4web/authentication/tests/functional tests/
+    ```
+After this you may run functional tests
+    ```bash
+    $ codeception run functional
+    ```
