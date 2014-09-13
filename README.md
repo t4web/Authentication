@@ -52,16 +52,23 @@ Installation
     ```
 Testing
 ------------
-Unit test runnig from box.
+Unit test runnig from authentication module directory.
     ```bash
     $ codeception run unit
     ```
-For running Functional tests create symbolic link to functional test directory:
-    ```bash
-    $ cd /root/path/to/zf/project
-    $ ln -s /root/path/to/zf/project/vendor/t4web/authentication/tests/functional tests/
+For running Functional you need create codecaption.yml in you project root, like this:
+    ```yml
+    include:
+        - vendor/t4web/authentication  # <- add authentication module tests to include
+
+    paths:
+        log: tests/_output
+
+    settings:
+        colors: true
+        memory_limit: 1024M
     ```
-After this you may run functional tests
+After this you may run functional tests from your project root
     ```bash
-    $ codeception run functional
+    $ codeception run
     ```
