@@ -4,10 +4,10 @@
 // You should not change it manually as it will be overwritten on next build
 // @codingStandardsIgnoreFile
 
-
+namespace authentication;
 use Codeception\Module\ZF2;
 use Codeception\Module\Filesystem;
-use Codeception\Module\FunctionalHelper;
+use authentication\Codeception\Module\FunctionalHelper;
 
 /**
  * Inherited Methods

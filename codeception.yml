@@ -1,3 +1,4 @@
+namespace: authentication 
 actor: Tester
 paths:
     tests: tests

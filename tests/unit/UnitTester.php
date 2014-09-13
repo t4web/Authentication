@@ -4,9 +4,9 @@
 // You should not change it manually as it will be overwritten on next build
 // @codingStandardsIgnoreFile
 
-
+namespace authentication;
 use Codeception\Module\Asserts;
-use Codeception\Module\UnitHelper;
+use authentication\Codeception\Module\UnitHelper;
 
 /**
  * Inherited Methods

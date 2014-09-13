@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use authentication\FunctionalTester;
+
 $I = new FunctionalTester($scenario);
 $I->wantTo('see login form');
 $I->amOnPage('/login-form');
