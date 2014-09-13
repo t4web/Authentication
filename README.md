@@ -56,7 +56,7 @@ Unit test runnig from authentication module directory.
     ```bash
     $ codeception run unit
     ```
-For running Functional you need create codecaption.yml in you project root, like this:
+For running Functional tests you need create codeception.yml in you project root, like this:
     ```yml
     include:
         - vendor/t4web/authentication  # <- add authentication module tests to include
