@@ -1,2 +1,0 @@
-<?php
-// Setup autoloading

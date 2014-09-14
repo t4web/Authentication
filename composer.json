@@ -16,11 +16,10 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-modulemanager": "~2.1",
-        "zendframework/zend-authentication": "~2.1"
+        "zendframework/zendframework": "2.3.*"
     },
     "require-dev" : {
-        "codeception/codeception": "<2"
+        "phpunit/phpunit": "4.2.*"
     },
     "autoload": {
         "psr-0": {

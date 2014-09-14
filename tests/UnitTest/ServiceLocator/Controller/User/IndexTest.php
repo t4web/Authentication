@@ -1,5 +1,5 @@
 <?php
-namespace serviceManager\Controller\User;
+namespace Authentication\UnitTest\ServiceLocator\Controller\User;
 
 use Authentication\Module;
 use Zend\ServiceManager\ServiceManager;
@@ -12,13 +12,8 @@ use Authentication\Controller\User\IndexController;
 use Codeception\Util\Stub;
 use Authentication\Service as AuthService;
 
-class IndexTest extends \Codeception\TestCase\Test
+class IndexTest extends \PHPUnit_Framework_TestCase
 {
-   /**
-    * @var \UnitTester
-    */
-    protected $tester;
-
     private $serviceManager;
     private $serviceManagerConfig;
 
@@ -27,7 +22,7 @@ class IndexTest extends \Codeception\TestCase\Test
      */
     private $controllerManager;
 
-    protected function _before()
+    protected function setUp()
     {
         $module = new Module();
 
@@ -45,10 +40,6 @@ class IndexTest extends \Codeception\TestCase\Test
         $this->controllerManager = new ControllerManager(new Config($module->getControllerConfig()));
         $this->controllerManager->setServiceLocator($this->serviceManager);
         $this->controllerManager->addPeeringServiceManager($this->serviceManager);
-    }
-
-    protected function _after()
-    {
     }
 
     public function testCreation()
