@@ -17,11 +17,30 @@ class IndexController extends AbstractActionController
 
     public function loginFormAction()
     {
-        // instantiate the authentication service
+        if ($this->isPost()) {
+            $username = $this->getFromPost('username');
+            $password = $this->getFromPost('password');
+
+            if (!$this->authService->authenticate($username, $password)) {
+                return array(
+                    'error' => $this->authService->getMessage()
+                );
+            }
+        }
     }
 
     public function logoutAction()
     {
 
+    }
+
+    protected function getFromPost($name, $default = null)
+    {
+        return $this->params()->fromPost($name, $default);
+    }
+
+    protected function isPost()
+    {
+        return $this->getRequest()->isPost();
     }
 }

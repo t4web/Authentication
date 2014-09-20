@@ -20,5 +20,9 @@ class LoginFormTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/login-form');
         $this->assertResponseStatusCode(200);
+
+        $this->assertQuery('input[name="username"]');
+        $this->assertQuery('input[name="password"]');
+        $this->assertQuery('button[type="submit"]');
     }
 }

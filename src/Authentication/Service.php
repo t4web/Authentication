@@ -8,5 +8,13 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Service {
 
+    public function authenticate($userName, $password)
+    {
+        return true;
+    }
+
+    public function getMessage(){
+        return "";
+    }
 
 }
