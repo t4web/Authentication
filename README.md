@@ -54,21 +54,14 @@ Testing
 ------------
 Unit test runnig from authentication module directory.
     ```bash
-    $ codeception run unit
+    $ cd vendor/t4web/authentication/tests
+    $ phupnit
     ```
-For running Functional tests you need create codeception.yml in you project root, like this:
-    ```yml
-    include:
-        - vendor/t4web/authentication  # <- add authentication module tests to include
-
-    paths:
-        log: tests/_output
-
-    settings:
-        colors: true
-        memory_limit: 1024M
-    ```
-After this you may run functional tests from your project root
+For running only Functional tests you need run phpunit, like this:
     ```bash
-    $ codeception run
+    $ phupnit --filter Functional
+    ```
+For running only Unit tests you need run phpunit, like this:
+    ```bash
+    $ phupnit --filter Unit
     ```
