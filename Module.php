@@ -35,8 +35,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Co
         return array(
             'factories' => array(
                 'Authentication\Service' => function (ServiceManager $sm) {
-                        return new Service();
-                    },
+                    return new Service();
+                },
             )
         );
     }
@@ -46,12 +46,12 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Co
         return array(
             'factories' => array(
                 'Authentication\Controller\User\Index' => function (ControllerManager $cm) {
-                        $sl = $cm->getServiceLocator();
+                    $sl = $cm->getServiceLocator();
 
-                        return new Controller\User\IndexController(
-                            $sl->get('Authentication\Service')
-                        );
-                    },
+                    return new Controller\User\IndexController(
+                        $sl->get('Authentication\Service')
+                    );
+                },
             )
         );
     }
