@@ -8,9 +8,11 @@ Introduction
 
 Requirements
 ------------
+* [Zend Framework 2](https://github.com/zendframework/zf2) (latest master)
 
 Features / Goals
 ----------------
+* Authenticate via username, email, or both [IN PROGRESS]
 
 Installation
 ------------
