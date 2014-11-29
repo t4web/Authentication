@@ -16,10 +16,12 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*"
+        "zendframework/zendframework": "2.3.*",
+
+        "t4web/modules": "0.2.*"
     },
     "require-dev" : {
-        "phpunit/phpunit": "4.2.*"
+        "codeception/codeception": "2.*"
     },
     "autoload": {
         "psr-0": {

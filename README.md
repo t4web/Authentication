@@ -26,17 +26,17 @@ Installation
 
 1. Add this project in your composer.json:
 
-    ```json
-    "require": {
-        "t4web/authentication": "dev-master"
-    }
-    ```
+```json
+"require": {
+    "t4web/authentication": "dev-master"
+}
+```
 
 2. Now tell composer to download Authentication by running the command:
 
-    ```bash
-    $ php composer.phar update
-    ```
+```bash
+$ php composer.phar update
+```
 
 #### Post installation
 
@@ -56,20 +56,22 @@ return array(
 Testing
 ------------
 Unit test runnig from authentication module directory.
-
 ```bash
-$ cd vendor/t4web/authentication/tests
-$ phpunit
+$ codeception run unit
 ```
+For running Functional tests you need create codeception.yml in you project root, like this:
+```yml
+include:
+    - vendor/t4web/authentication  # <- add authentication module tests to include
 
-For running only Functional tests you need run phpunit, like this:
+paths:
+    log: tests/_output
 
-```bash
-$ phpunit --filter Functional
+settings:
+    colors: true
+    memory_limit: 1024M
 ```
-
-For running only Unit tests you need run phpunit, like this:
-
+After this you may run functional tests from your project root
 ```bash
-$ phpunit --filter Unit
+$ codeception run
 ```
