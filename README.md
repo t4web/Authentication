@@ -20,11 +20,11 @@ Installation
 
 #### By cloning project
 
-1. Clone this project into your `./vendor/` directory.
+Clone this project into your `./vendor/` directory.
 
 #### With composer
 
-1. Add this project in your composer.json:
+Add this project in your composer.json:
 
 ```json
 "require": {
@@ -32,7 +32,7 @@ Installation
 }
 ```
 
-2. Now tell composer to download Authentication by running the command:
+Now tell composer to download Authentication by running the command:
 
 ```bash
 $ php composer.phar update
