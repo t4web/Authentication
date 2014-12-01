@@ -5,7 +5,7 @@ namespace Authentication\Migrations;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Migration_0_0_1 implements ServiceLocatorAwareInterface {
+class Migration002 implements ServiceLocatorAwareInterface {
 
     private $serviceLocator;
 
