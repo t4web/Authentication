@@ -1,28 +1,60 @@
-<div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4">
-        <h1 class="text-center login-title">Log in to continue</h1>
-
-        <div class="account-wall">
-            <form class="form-signin" method="post">
-                <div class="form-group">
-                    <input name="username" type="text" class="form-control" placeholder="Email" required autofocus>
-                </div>
-                <div class="form-group">
-                    <input name="password" type="password" class="form-control" placeholder="Password" required>
-                </div>
-
-                <?php if (isset($errorMessage)):?>
-                    <div class="errorMessage"> <?= $errorMessage  ?></div>
-                <?php endif; ?>
-
-                <label class="pull-left">
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                <a href="/" class="pull-right"><i class="fa fa-reply"></i> Go to main </a>
-                <a href="#" class="text-center new-account">Forgot pass?</a>
-            </form>
-        </div>
+<form action="index.html" id="signin-form_id">
+    <div class="signin-text">
+        <span>Sign In to your account</span>
     </div>
+    <!-- / .signin-text -->
+
+    <div class="form-group w-icon">
+        <input type="text" name="username" id="username_id" class="form-control input-lg"
+               placeholder="Username or email">
+        <span class="fa fa-user signin-form-icon"></span>
+    </div>
+    <!-- / Username -->
+
+    <div class="form-group w-icon">
+        <input type="password" name="password" id="password_id" class="form-control input-lg"
+               placeholder="Password">
+        <span class="fa fa-lock signin-form-icon"></span>
+    </div>
+
+    <?php if (isset($errorMessage)):?>
+        <div class="errorMessage"> <?= $errorMessage  ?></div>
+    <?php endif; ?>
+    <!-- / Password -->
+
+    <div class="form-actions">
+        <input type="submit" value="SIGN IN" class="signin-btn bg-primary">
+        <a href="#" class="forgot-password" id="forgot-password-link">Forgot your password?</a>
+    </div>
+    <!-- / .form-actions -->
+</form>
+<!-- / Form -->
+
+<!-- Password reset form -->
+<div class="password-reset-form" id="password-reset-form">
+    <div class="header">
+        <div class="signin-text">
+            <span>Password reset</span>
+
+            <div class="close">&times;</div>
+        </div>
+        <!-- / .signin-text -->
+    </div>
+    <!-- / .header -->
+
+    <!-- Form -->
+    <form action="index.html" id="password-reset-form_id">
+        <div class="form-group w-icon">
+            <input type="text" name="password_reset_email" id="p_email_id" class="form-control input-lg"
+                   placeholder="Enter your email">
+            <span class="fa fa-envelope signin-form-icon"></span>
+        </div>
+        <!-- / Email -->
+
+        <div class="form-actions">
+            <input type="submit" value="SEND PASSWORD RESET LINK" class="signin-btn bg-primary">
+        </div>
+        <!-- / .form-actions -->
+    </form>
+    <!-- / Form -->
 </div>
