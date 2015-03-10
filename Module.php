@@ -11,7 +11,7 @@ use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventInterface;
-use Zend\Mvc\Router\RouteMatch;
+use Zend\Authentication\AuthenticationService;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                         ControllerProviderInterface, ServiceProviderInterface,
@@ -19,44 +19,12 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
 {
     public function onBootstrap(EventInterface $e)
     {
-        $app = $e->getApplication();
-        $em  = $app->getEventManager();
-        $sm  = $app->getServiceManager();
+        $em  = $e->getApplication()->getEventManager();
+        $sm  = $e->getApplication()->getServiceManager();
 
         $auth = $sm->get('Authentication\Service');
 
-        $em->attach(MvcEvent::EVENT_ROUTE, function($e) use ($auth) {
-            $match = $e->getRouteMatch();
-
-            // No route match, this is a 404
-            if (!$match instanceof RouteMatch) {
-                return;
-            }
-
-            // Route is whitelisted
-            $name = $match->getMatchedRouteName();
-            if ($name == 'auth-login') {
-                return;
-            }
-
-            // User is authenticated
-            //if ($auth->hasIdentity()) {
-            //   return;
-            //}
-
-            // Redirect to the user login page, as an example
-            $router   = $e->getRouter();
-            $url      = $router->assemble(array(), array(
-                'name' => 'auth-login'
-            ));
-
-            $response = $e->getResponse();
-            $response->getHeaders()->addHeaderLine('Location', $url);
-            $response->setStatusCode(302);
-            $response->setReasonPhrase('Unauthorized');
-
-            return $response;
-        }, -100);
+        $em->attach(MvcEvent::EVENT_ROUTE, array($auth, 'checkAuthentication'), -100);
     }
 
     public function getConfig($env = null)
@@ -80,7 +48,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
         return array(
             'factories' => array(
                 'Authentication\Service' => function (ServiceManager $sm) {
-                    return new Service();
+                    return new Service(
+                        new AuthenticationService(),
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
                 },
             )
         );
