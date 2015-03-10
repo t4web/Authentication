@@ -27,6 +27,8 @@ class IndexController extends AbstractActionController
                 );
             }
         }
+
+        $this->layout('layout/auth');
     }
 
     public function logoutAction()
