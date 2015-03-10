@@ -21,6 +21,34 @@ return array(
                     ),
                 ),
             ),
+            'auth-logout' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/logout',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Authentication\Controller\User',
+                        'controller'    => 'Index',
+                        'action'        => 'logout',
+                    ),
+                ),
+            ),
         ),
+    ),
+
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'auth-init' => array(
+                    'options' => array(
+                        'route'    => 'auth init',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Authentication\Controller\Console',
+                            'controller' => 'Init',
+                            'action'     => 'run'
+                        )
+                    )
+                ),
+            )
+        )
     ),
 );

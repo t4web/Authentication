@@ -7,6 +7,8 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapterInterface;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\MvcEvent;
@@ -15,7 +17,7 @@ use Zend\Authentication\AuthenticationService;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                         ControllerProviderInterface, ServiceProviderInterface,
-                        BootstrapListenerInterface
+                        BootstrapListenerInterface, ConsoleUsageProviderInterface
 {
     public function onBootstrap(EventInterface $e)
     {
@@ -43,6 +45,13 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
         );
     }
 
+    public function getConsoleUsage(ConsoleAdapterInterface $console)
+    {
+        return array(
+            'auth init' => 'Initialize module',
+        );
+    }
+
     public function getServiceConfig()
     {
         return array(
@@ -61,6 +70,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
     {
         return array(
             'factories' => array(
+                'Authentication\Controller\Console\Init' => function (ControllerManager $cm) {
+                    $sl = $cm->getServiceLocator();
+
+                    return new Controller\Console\InitController(
+                        $sl->get('Zend\Db\Adapter\Adapter')
+                    );
+                },
+
                 'Authentication\Controller\User\Index' => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 

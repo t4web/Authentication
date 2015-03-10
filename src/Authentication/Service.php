@@ -8,6 +8,7 @@ use Zend\Authentication\Result as AuthResult;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use Zend\Console\Request as ConsoleRequest;
 
 class Service {
 
@@ -38,6 +39,10 @@ class Service {
 
         // No route match, this is a 404
         if (!$match instanceof RouteMatch) {
+            return;
+        }
+
+        if ($event->getRequest() instanceof ConsoleRequest) {
             return;
         }
 
@@ -90,14 +95,14 @@ class Service {
         $resultRow = $authAdapter->getResultRowObject();
 
         $this->authService->getStorage()->write(
-            array('user_id' => $resultRow->user_id)
+            array('id' => $resultRow->id)
         );
 
         return true;
     }
 
     public function getMessages() {
-        return $this->result->getMessages();
+        return $this->result->getMessages()[0];
     }
 
     public function hasIdentity() {
@@ -111,11 +116,11 @@ class Service {
     public function getUserId() {
         $storage = $this->authService->getStorage()->read();
 
-        if (!isset($storage['user_id'])) {
+        if (!isset($storage['id'])) {
             return false;
         }
 
-        return $storage['user_id'];
+        return $storage['id'];
     }
 
     public function logout() {

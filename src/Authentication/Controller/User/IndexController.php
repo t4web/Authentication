@@ -3,6 +3,7 @@
 namespace Authentication\Controller\User;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 use Authentication\Service as AuthService;
 
 class IndexController extends AbstractActionController
@@ -17,23 +18,26 @@ class IndexController extends AbstractActionController
 
     public function loginFormAction()
     {
+        $this->layout('layout/auth');
+
         if ($this->isPost()) {
             $username = $this->getFromPost('username');
             $password = $this->getFromPost('password');
 
             if (!$this->authService->authenticate($username, $password)) {
-                return array(
-                    'error' => $this->authService->getMessage()
-                );
+                $view = new ViewModel();
+                $view->errorMessage = $this->authService->getMessages();
+                return $view;
             }
-        }
 
-        $this->layout('layout/auth');
+            return $this->redirect()->toUrl('/');
+        }
     }
 
     public function logoutAction()
     {
-
+        $this->authService->logout();
+        return $this->redirect()->toRoute('auth-login');
     }
 
     protected function getFromPost($name, $default = null)
