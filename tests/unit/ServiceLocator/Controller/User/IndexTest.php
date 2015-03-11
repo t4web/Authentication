@@ -53,7 +53,15 @@ class IndexTest extends \Codeception\TestCase\Test
 
     public function testCreation()
     {
-        $authService = new AuthService();
+        $authServiceMock = $this->getMockBuilder('Zend\Authentication\AuthenticationService')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dbAdapterMock = $this->getMockBuilder('Zend\Db\Adapter\Adapter')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $authService = new AuthService($authServiceMock, $dbAdapterMock);
 
         $this->serviceManager->setService('Authentication\Service', $authService);
 
