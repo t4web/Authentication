@@ -16,9 +16,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*",
-
-        "t4web/modules": "0.2.*"
+        "zendframework/zendframework": "2.3.*"
     },
     "require-dev" : {
         "codeception/codeception": "2.*"
