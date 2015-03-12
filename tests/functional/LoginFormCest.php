@@ -1,9 +1,9 @@
 <?php
 
-namespace Authentication\FunctionalTest;
+namespace T4webAuthentication\FunctionalTest;
 /*
-use Authentication\FunctionalTester;
-use Authentication\Controller\User\IndexController;
+use T4webAuthentication\FunctionalTester;
+use T4webAuthentication\Controller\User\IndexController;
 use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Router\RouteMatch;
 
@@ -21,7 +21,7 @@ class LoginFormCest
 
         $this->routeMatch = new RouteMatch(
             array(
-                'controller' => 'Authentication\Controller\User\Index',
+                'controller' => 'T4webAuthentication\Controller\User\Index',
             )
         );
         $this->event->setRouteMatch($this->routeMatch);
@@ -35,7 +35,7 @@ class LoginFormCest
         $this->routeMatch->setParam('action', 'loginForm');
 
         $controller = new IndexController(
-            $this->application->getServiceManager()->get('Authentication\Service')
+            $this->application->getServiceManager()->get('T4webAuthentication\Service')
         );
 
         $controller->setEvent($this->event);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Authentication;
+namespace T4webAuthentication;
 
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;

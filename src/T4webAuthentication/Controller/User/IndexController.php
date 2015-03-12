@@ -1,10 +1,10 @@
 <?php
 
-namespace Authentication\Controller\User;
+namespace T4webAuthentication\Controller\User;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Authentication\Service as AuthService;
+use T4webAuthentication\Service as AuthService;
 
 class IndexController extends AbstractActionController
 {

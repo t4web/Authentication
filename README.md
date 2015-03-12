@@ -1,4 +1,4 @@
-Authentication
+T4webAuthentication
 ==============
 
 Authentication module for zf2
@@ -47,7 +47,7 @@ Enabling it in your `application.config.php`file.
 return array(
     'modules' => array(
         // ...
-        'Authentication',
+        'T4webAuthentication',
     ),
     // ...
 );

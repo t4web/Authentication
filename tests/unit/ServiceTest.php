@@ -1,7 +1,7 @@
 <?php
-namespace Authentication\UnitTest;
+namespace T4webAuthentication\UnitTest;
 
-use Authentication\Service as AuthService;
+use T4webAuthentication\Service as AuthService;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {

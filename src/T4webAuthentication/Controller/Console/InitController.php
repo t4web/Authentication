@@ -1,6 +1,6 @@
 <?php
 
-namespace Authentication\Controller\Console;
+namespace T4webAuthentication\Controller\Console;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Db\Adapter\Adapter;

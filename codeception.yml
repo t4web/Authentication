@@ -1,4 +1,4 @@
-namespace: authentication 
+namespace: T4webAuthentication
 actor: Tester
 paths:
     tests: tests

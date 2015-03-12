@@ -1,6 +1,6 @@
 <?php
 
-namespace Authentication;
+namespace T4webAuthentication;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -24,7 +24,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
         $em  = $e->getApplication()->getEventManager();
         $sm  = $e->getApplication()->getServiceManager();
 
-        $auth = $sm->get('Authentication\Service');
+        $auth = $sm->get('T4webAuthentication\Service');
 
         $em->attach(MvcEvent::EVENT_ROUTE, array($auth, 'checkAuthentication'), -100);
     }
@@ -56,7 +56,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
     {
         return array(
             'factories' => array(
-                'Authentication\Service' => function (ServiceManager $sm) {
+                'T4webAuthentication\Service' => function (ServiceManager $sm) {
                     return new Service(
                         new AuthenticationService(),
                         $sm->get('Zend\Db\Adapter\Adapter')
@@ -70,7 +70,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
     {
         return array(
             'factories' => array(
-                'Authentication\Controller\Console\Init' => function (ControllerManager $cm) {
+                'T4webAuthentication\Controller\Console\Init' => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 
                     return new Controller\Console\InitController(
@@ -78,11 +78,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                     );
                 },
 
-                'Authentication\Controller\User\Index' => function (ControllerManager $cm) {
+                'T4webAuthentication\Controller\User\Index' => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 
                     return new Controller\User\IndexController(
-                        $sl->get('Authentication\Service')
+                        $sl->get('T4webAuthentication\Service')
                     );
                 },
             )

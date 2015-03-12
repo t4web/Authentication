@@ -4,9 +4,9 @@
 // You should not change it manually as it will be overwritten on next build
 // @codingStandardsIgnoreFile
 
-namespace authentication;
+namespace T4webAuthentication;
 use Codeception\Module\Asserts;
-use authentication\Codeception\Module\UnitHelper;
+use T4webAuthentication\Codeception\Module\UnitHelper;
 
 /**
  * Inherited Methods

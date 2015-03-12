@@ -4,7 +4,7 @@ return array(
 
     'view_manager' => array(
         'template_path_stack' => array(
-            'authentication' => __DIR__ . '/../view',
+            __DIR__ . '/../view',
         ),
     ),
 
@@ -15,7 +15,7 @@ return array(
                 'options' => array(
                     'route'    => '/login-form',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Authentication\Controller\User',
+                        '__NAMESPACE__' => 'T4webAuthentication\Controller\User',
                         'controller'    => 'Index',
                         'action'        => 'login-form',
                     ),
@@ -26,7 +26,7 @@ return array(
                 'options' => array(
                     'route'    => '/logout',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Authentication\Controller\User',
+                        '__NAMESPACE__' => 'T4webAuthentication\Controller\User',
                         'controller'    => 'Index',
                         'action'        => 'logout',
                     ),
@@ -42,7 +42,7 @@ return array(
                     'options' => array(
                         'route'    => 'auth init',
                         'defaults' => array(
-                            '__NAMESPACE__' => 'Authentication\Controller\Console',
+                            '__NAMESPACE__' => 'T4webAuthentication\Controller\Console',
                             'controller' => 'Init',
                             'action'     => 'run'
                         )
