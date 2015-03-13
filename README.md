@@ -1,4 +1,4 @@
-T4webAuthentication
+Authentication
 ==============
 
 Authentication module for zf2
@@ -28,7 +28,7 @@ Add this project in your composer.json:
 
 ```json
 "require": {
-    "t4web/t4web-authentication": "0.0.*"
+    "t4web/authentication": "0.0.*"
 }
 ```
 
@@ -62,7 +62,7 @@ $ codeception run unit
 For running Functional tests you need create codeception.yml in you project root, like this:
 ```yml
 include:
-    - vendor/t4web/t4web-authentication  # <- add authentication module tests to include
+    - vendor/t4web/authentication  # <- add authentication module tests to include
 
 paths:
     log: tests/_output
