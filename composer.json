@@ -1,12 +1,12 @@
 {
-    "name": "t4web/t4web-authentication",
+    "name": "t4web/authentication",
     "description": "A generic user authentication module for ZF2.",
     "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2"
     ],
-    "homepage": "https://github.com/t4web/T4webAuthentication",
+    "homepage": "https://github.com/t4web/Authentication",
     "authors": [
         {
             "name": "Max Gulturyan",
