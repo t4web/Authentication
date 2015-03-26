@@ -51,4 +51,22 @@ return array(
             )
         )
     ),
+
+    'db' => array(
+        'tables' => array(
+            't4webauthentication-entry' => array(
+                'name' => 'auth',
+                'columnsAsAttributesMap' => array(
+                    'id' => 'id',
+                    'login' => 'login',
+                    'password' => 'password',
+                ),
+            ),
+        ),
+    ),
+    'criteries' => array(
+        'Entry' => array(
+            'empty' => array('table' => 'auth'),
+        ),
+    ),
 );
