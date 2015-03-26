@@ -14,9 +14,17 @@
             "homepage": "http://about.me/maxgu"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/t4web/base.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*"
+        "zendframework/zendframework": "2.3.*",
+
+        "t4web/base": "dev-master"
     },
     "require-dev" : {
         "codeception/codeception": "2.*"
