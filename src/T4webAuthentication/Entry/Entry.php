@@ -9,4 +9,11 @@ class Entry extends Entity {
     protected $login;
     protected $password;
 
+    /**
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
 }
