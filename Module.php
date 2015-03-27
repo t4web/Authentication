@@ -14,6 +14,7 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventInterface;
 use Zend\Authentication\AuthenticationService;
+use T4webBase\Domain\Service\BaseFinder as ServiceFinder;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                         ControllerProviderInterface, ServiceProviderInterface,
@@ -60,6 +61,13 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                     return new Service(
                         new AuthenticationService(),
                         $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                },
+
+                'T4webAuthentication\Entry\Service\Finder' => function (ServiceManager $sm) {
+                    return new ServiceFinder(
+                        $sm->get('T4webAuthentication\Entry\Repository\DbRepository'),
+                        $sm->get('T4webAuthentication\Entry\Criteria\CriteriaFactory')
                     );
                 },
             )
