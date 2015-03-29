@@ -70,6 +70,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                         $sm->get('T4webAuthentication\Entry\Mapper\DbMapper'),
                         $sm->get('T4webBase\Db\QueryBuilder'),
                         clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
+                        clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
                         $sm->get('EventManager')
                     );
                 },
