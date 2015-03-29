@@ -65,13 +65,16 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                 },
 
                 'T4webAuthentication\Entry\Repository\DbRepository' => function (ServiceManager $sm) {
+                    $eventManager = $sm->get('EventManager');
+                    $eventManager->addIdentifiers('T4webAuthentication\Entry\Repository\DbRepository');
+
                     return new Entry\Repository\DbRepository(
                         $sm->get('T4webAuthentication\Entry\Db\Table'),
                         $sm->get('T4webAuthentication\Entry\Mapper\DbMapper'),
                         $sm->get('T4webBase\Db\QueryBuilder'),
                         clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
                         clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
-                        $sm->get('EventManager')
+                        $eventManager
                     );
                 },
 
