@@ -18,7 +18,7 @@ class DbRepository extends BaseDbRepository {
             $result = $this->tableGateway->updateByPrimaryKey($data, $id);
 
             $e = $this->getEvent();
-            $originalEntity = $this->getIdentityMap()->offsetGet($entity->getId());
+            $originalEntity = $this->identityMapOriginal->offsetGet($entity->getId());
             $e->setOriginalEntity($originalEntity);
             $e->setChangedEntity($entity);
 
