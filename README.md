@@ -28,7 +28,7 @@ Add this project in your composer.json:
 
 ```json
 "require": {
-    "t4web/authentication": "0.0.*"
+    "t4web/authentication": "1.0.*"
 }
 ```
 
