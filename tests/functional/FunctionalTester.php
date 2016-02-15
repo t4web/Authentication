@@ -4,10 +4,10 @@
 // You should not change it manually as it will be overwritten on next build
 // @codingStandardsIgnoreFile
 
-namespace T4webAuthentication;
+namespace T4web\Authentication;
 use Codeception\Module\ZF2;
 use Codeception\Module\Filesystem;
-use T4webAuthentication\Codeception\Module\FunctionalHelper;
+use T4web\Authentication\Codeception\Module\FunctionalHelper;
 
 /**
  * Inherited Methods
@@ -2188,7 +2188,7 @@ class FunctionalTester extends \Codeception\Actor
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      *
-     * @see \T4webAuthentication\Codeception\Module\FunctionalHelper::getApplication()
+     * @see \T4web\Authentication\Codeception\Module\FunctionalHelper::getApplication()
      */
     public function getApplication() {
         return $this->scenario->runStep(new \Codeception\Step\Action('getApplication', func_get_args()));

@@ -1,6 +1,6 @@
 <?php
 
-namespace T4webAuthentication\Entry;
+namespace T4web\Authentication\Entry;
 
 use T4webBase\Domain\Entity;
 

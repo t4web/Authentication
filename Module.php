@@ -1,6 +1,6 @@
 <?php
 
-namespace T4webAuthentication;
+namespace T4web\Authentication;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -25,7 +25,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
         $em  = $e->getApplication()->getEventManager();
         $sm  = $e->getApplication()->getServiceManager();
 
-        $authChecker = $sm->get('T4webAuthentication\Service\Checker');
+        $authChecker = $sm->get('T4web\Authentication\Service\Checker');
 
         $em->attach(MvcEvent::EVENT_ROUTE, array($authChecker, 'check'), -100);
     }
@@ -57,25 +57,25 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
     {
         return array(
             'factories' => array(
-                'T4webAuthentication\Service' => function (ServiceManager $sm) {
+                'T4web\Authentication\Service' => function (ServiceManager $sm) {
                     return new Service(
                         new AuthenticationService(),
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                 },
-                'T4webAuthentication\Service\Checker' => function (ServiceManager $sm) {
+                'T4web\Authentication\Service\Checker' => function (ServiceManager $sm) {
                     return new Service\Checker(
                         new AuthenticationService()
                     );
                 },
 
-                'T4webAuthentication\Entry\Repository\DbRepository' => function (ServiceManager $sm) {
+                'T4web\Authentication\Entry\Repository\DbRepository' => function (ServiceManager $sm) {
                     $eventManager = $sm->get('EventManager');
-                    $eventManager->addIdentifiers('T4webAuthentication\Entry\Repository\DbRepository');
+                    $eventManager->addIdentifiers('T4web\Authentication\Entry\Repository\DbRepository');
 
                     return new Entry\Repository\DbRepository(
-                        $sm->get('T4webAuthentication\Entry\Db\Table'),
-                        $sm->get('T4webAuthentication\Entry\Mapper\DbMapper'),
+                        $sm->get('T4web\Authentication\Entry\Db\Table'),
+                        $sm->get('T4web\Authentication\Entry\Mapper\DbMapper'),
                         $sm->get('T4webBase\Db\QueryBuilder'),
                         clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
                         clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
@@ -83,10 +83,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                     );
                 },
 
-                'T4webAuthentication\Entry\Service\Finder' => function (ServiceManager $sm) {
+                'T4web\Authentication\Entry\Service\Finder' => function (ServiceManager $sm) {
                     return new ServiceFinder(
-                        $sm->get('T4webAuthentication\Entry\Repository\DbRepository'),
-                        $sm->get('T4webAuthentication\Entry\Criteria\CriteriaFactory')
+                        $sm->get('T4web\Authentication\Entry\Repository\DbRepository'),
+                        $sm->get('T4web\Authentication\Entry\Criteria\CriteriaFactory')
                     );
                 },
             )
@@ -97,7 +97,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
     {
         return array(
             'factories' => array(
-                'T4webAuthentication\Controller\Console\Init' => function (ControllerManager $cm) {
+                'T4web\Authentication\Controller\Console\Init' => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 
                     return new Controller\Console\InitController(
@@ -105,11 +105,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                     );
                 },
 
-                'T4webAuthentication\Controller\User\Index' => function (ControllerManager $cm) {
+                'T4web\Authentication\Controller\User\Index' => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 
                     return new Controller\User\IndexController(
-                        $sl->get('T4webAuthentication\Service')
+                        $sl->get('T4web\Authentication\Service')
                     );
                 },
             )

@@ -47,7 +47,7 @@ Enabling it in your `application.config.php`file.
 return array(
     'modules' => array(
         // ...
-        'T4webAuthentication',
+        'T4web\Authentication',
     ),
     // ...
 );

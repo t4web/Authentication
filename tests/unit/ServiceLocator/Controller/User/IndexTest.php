@@ -1,16 +1,16 @@
 <?php
-namespace T4webAuthentication\UnitTest\ServiceLocator\Controller\User;
+namespace T4web\Authentication\UnitTest\ServiceLocator\Controller\User;
 
-use T4webAuthentication\Module;
+use T4web\Authentication\Module;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\Config;
 use Zend\Mvc\Controller\PluginManager as ControllerPluginManager;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
-use T4webAuthentication\Controller\User\IndexController;
+use T4web\Authentication\Controller\User\IndexController;
 use Codeception\Util\Stub;
-use T4webAuthentication\Service as AuthService;
+use T4web\Authentication\Service as AuthService;
 
 class IndexTest extends \Codeception\TestCase\Test
 {
@@ -63,11 +63,11 @@ class IndexTest extends \Codeception\TestCase\Test
 
         $authService = new AuthService($authServiceMock, $dbAdapterMock);
 
-        $this->serviceManager->setService('T4webAuthentication\Service', $authService);
+        $this->serviceManager->setService('T4web\Authentication\Service', $authService);
 
-        $this->assertTrue($this->controllerManager->has('T4webAuthentication\Controller\User\Index'));
+        $this->assertTrue($this->controllerManager->has('T4web\Authentication\Controller\User\Index'));
 
-        $controller = $this->controllerManager->get('T4webAuthentication\Controller\User\Index');
+        $controller = $this->controllerManager->get('T4web\Authentication\Controller\User\Index');
 
         $this->assertAttributeSame($authService, 'authService', $controller);
     }

@@ -1,5 +1,5 @@
 <?php
-namespace T4webAuthentication\Entry\Repository;
+namespace T4web\Authentication\Entry\Repository;
 
 use T4webBase\Domain\Repository\DbRepository as BaseDbRepository;
 use T4webBase\Domain\EntityInterface;

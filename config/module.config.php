@@ -17,7 +17,7 @@ return array(
                 'options' => array(
                     'route'    => '/login-form',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'T4webAuthentication\Controller\User',
+                        '__NAMESPACE__' => 'T4web\Authentication\Controller\User',
                         'controller'    => 'Index',
                         'action'        => 'login-form',
                     ),
@@ -28,7 +28,7 @@ return array(
                 'options' => array(
                     'route'    => '/logout',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'T4webAuthentication\Controller\User',
+                        '__NAMESPACE__' => 'T4web\Authentication\Controller\User',
                         'controller'    => 'Index',
                         'action'        => 'logout',
                     ),
@@ -44,7 +44,7 @@ return array(
                     'options' => array(
                         'route'    => 'auth init',
                         'defaults' => array(
-                            '__NAMESPACE__' => 'T4webAuthentication\Controller\Console',
+                            '__NAMESPACE__' => 'T4web\Authentication\Controller\Console',
                             'controller' => 'Init',
                             'action'     => 'run'
                         )

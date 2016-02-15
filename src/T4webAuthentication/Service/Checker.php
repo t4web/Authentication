@@ -1,6 +1,6 @@
 <?php
 
-namespace T4webAuthentication\Service;
+namespace T4web\Authentication\Service;
 
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\MvcEvent;

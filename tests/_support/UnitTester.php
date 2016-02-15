@@ -1,5 +1,5 @@
 <?php
-namespace T4webAuthentication;
+namespace T4web\Authentication;
 
 /**
  * Inherited Methods

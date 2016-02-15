@@ -1,26 +1,26 @@
 <?php
-namespace T4webAuthentication\UnitTest\Controller\User;
+namespace T4web\Authentication\UnitTest\Controller\User;
 
 class IndexTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \T4webAuthentication\Controller\User\IndexController
+     * @var \T4web\Authentication\Controller\User\IndexController
      */
     private $controller;
 
     /**
-     * @var \T4webAuthentication\Service
+     * @var \T4web\Authentication\Service
      */
     private $authServiceMock;
 
     protected function setUp()
     {
-        $this->authServiceMock = $this->getMockBuilder('T4webAuthentication\Service')
+        $this->authServiceMock = $this->getMockBuilder('T4web\Authentication\Service')
             ->disableOriginalConstructor()
             ->getMock();
         $this->controller = $this->getMock(
-            'T4webAuthentication\Controller\User\IndexController',
+            'T4web\Authentication\Controller\User\IndexController',
             array('getFromPost', 'isPost', 'redirect'),
             array($this->authServiceMock)
         );

@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-0": {
-            "T4webAuthentication": "src/"
+            "T4web\\Authentication": "src/"
         },
         "classmap": [
             "./Module.php"

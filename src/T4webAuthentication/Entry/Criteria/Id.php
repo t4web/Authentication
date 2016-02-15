@@ -1,6 +1,6 @@
 <?php
 
-namespace T4webAuthentication\Entry\Criteria;
+namespace T4web\Authentication\Entry\Criteria;
 
 use T4webBase\Domain\Criteria\Id as BaseIdCriteria;
 
