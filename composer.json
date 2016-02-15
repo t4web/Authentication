@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "T4web\\Authentication": "src/"
+            "T4web\\Authentication\\": "src/"
         }
     }
 }
