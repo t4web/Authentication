@@ -24,11 +24,8 @@
         "codeception/codeception": "2.*"
     },
     "autoload": {
-        "psr-0": {
-            "T4web\\Authentication": "src/Authentication/"
-        },
-        "classmap": [
-            "./Module.php"
-        ]
+        "psr-4": {
+            "T4web\\Authentication": "src/"
+        }
     }
 }
