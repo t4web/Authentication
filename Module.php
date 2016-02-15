@@ -25,9 +25,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
         $em  = $e->getApplication()->getEventManager();
         $sm  = $e->getApplication()->getServiceManager();
 
-        $auth = $sm->get('T4webAuthentication\Service');
+        $authChecker = $sm->get('T4webAuthentication\Service\Checker');
 
-        $em->attach(MvcEvent::EVENT_ROUTE, array($auth, 'checkAuthentication'), -100);
+        $em->attach(MvcEvent::EVENT_ROUTE, array($authChecker, 'check'), -100);
     }
 
     public function getConfig($env = null)
@@ -61,6 +61,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                     return new Service(
                         new AuthenticationService(),
                         $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                },
+                'T4webAuthentication\Service\Checker' => function (ServiceManager $sm) {
+                    return new Service\Checker(
+                        new AuthenticationService()
                     );
                 },
 

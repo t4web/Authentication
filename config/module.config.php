@@ -1,5 +1,7 @@
 <?php
 
+use Zend\Mvc\Router\RouteMatch;
+
 return array(
 
     'view_manager' => array(
@@ -64,9 +66,25 @@ return array(
             ),
         ),
     ),
+
     'criteries' => array(
         'Entry' => array(
             'empty' => array('table' => 'auth'),
         ),
     ),
+
+    // if true = authorization needed
+    'need-authorization-callback' => function(RouteMatch $match) {
+        $name = $match->getMatchedRouteName();
+
+        if ($name == 'auth-login') {
+            return false;
+        }
+
+        if (strpos($name, 'admin') !== false) {
+            return true;
+        }
+
+        return false;
+    }
 );
