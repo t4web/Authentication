@@ -4,22 +4,19 @@ namespace T4web\Authentication\Controller\User;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use T4web\Authentication\Service as AuthService;
+use T4web\Authentication\Service\Authenticator;
 
 class IndexController extends AbstractActionController
 {
-
     private $authService;
 
-    public function __construct(AuthService $authService)
+    public function __construct(Authenticator $authService)
     {
         $this->authService = $authService;
     }
 
     public function loginFormAction()
     {
-        $this->layout('layout/auth');
-
         if ($this->isPost()) {
             $username = $this->getFromPost('username');
             $password = $this->getFromPost('password');
