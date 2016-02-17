@@ -5,26 +5,20 @@ namespace T4web\Authentication;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
-use Zend\Console\Adapter\AdapterInterface as ConsoleAdapterInterface;
 use Zend\Mvc\Controller\ControllerManager;
-use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventInterface;
-use T4webBase\Domain\Service\BaseFinder as ServiceFinder;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
-                        ControllerProviderInterface, ServiceProviderInterface,
-                        BootstrapListenerInterface, ConsoleUsageProviderInterface
+                        ControllerProviderInterface, BootstrapListenerInterface
 {
     public function onBootstrap(EventInterface $e)
     {
         $em  = $e->getApplication()->getEventManager();
         $sm  = $e->getApplication()->getServiceManager();
 
-        $authChecker = $sm->get('T4web\Authentication\Service\Checker');
+        $authChecker = $sm->get(Service\Checker::class);
 
         $em->attach(MvcEvent::EVENT_ROUTE, array($authChecker, 'check'), -100);
     }
@@ -45,54 +39,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
         );
     }
 
-    public function getConsoleUsage(ConsoleAdapterInterface $console)
-    {
-        return array(
-            'auth init' => 'Initialize module',
-        );
-    }
-
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                'T4web\Authentication\Entry\Repository\DbRepository' => function (ServiceManager $sm) {
-                    $eventManager = $sm->get('EventManager');
-                    $eventManager->addIdentifiers('T4web\Authentication\Entry\Repository\DbRepository');
-
-                    return new Entry\Repository\DbRepository(
-                        $sm->get('T4web\Authentication\Entry\Db\Table'),
-                        $sm->get('T4web\Authentication\Entry\Mapper\DbMapper'),
-                        $sm->get('T4webBase\Db\QueryBuilder'),
-                        clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
-                        clone $sm->get('T4webBase\Domain\Repository\IdentityMap'),
-                        $eventManager
-                    );
-                },
-
-                'T4web\Authentication\Entry\Service\Finder' => function (ServiceManager $sm) {
-                    return new ServiceFinder(
-                        $sm->get('T4web\Authentication\Entry\Repository\DbRepository'),
-                        $sm->get('T4web\Authentication\Entry\Criteria\CriteriaFactory')
-                    );
-                },
-            )
-        );
-    }
-
     public function getControllerConfig()
     {
         return array(
             'factories' => array(
-                'T4web\Authentication\Controller\Console\Init' => function (ControllerManager $cm) {
-                    $sl = $cm->getServiceLocator();
-
-                    return new Controller\Console\InitController(
-                        $sl->get('Zend\Db\Adapter\Adapter')
-                    );
-                },
-
-                'T4web\Authentication\Controller\User\Index' => function (ControllerManager $cm) {
+                Controller\User\IndexController::class => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 
                     return new Controller\User\IndexController(

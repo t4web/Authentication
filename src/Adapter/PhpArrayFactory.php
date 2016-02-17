@@ -13,6 +13,13 @@ class PhpArrayFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new PhpArray();
+        $config = $serviceLocator->get('Config');
+
+        $authAccounts = [];
+        if (isset($config['auth-accounts']) && is_array($config['auth-accounts'])) {
+            $authAccounts = $config['auth-accounts'];
+        }
+
+        return new PhpArray($authAccounts);
     }
 }

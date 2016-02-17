@@ -29,8 +29,8 @@ class Authenticator {
     }
 
     public function authenticate($username, $password) {
-        $this->adapter->setIdentity($username)
-            ->setCredential($password);
+        $this->adapter->setIdentity($username);
+        $this->adapter->setCredential($password);
 
         // Attempt authentication, saving the result
         /* @var $result AuthResult */

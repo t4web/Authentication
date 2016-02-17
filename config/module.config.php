@@ -20,7 +20,7 @@ return array(
                     'route'    => '/login-form',
                     'defaults' => array(
                         '__NAMESPACE__' => 'T4web\Authentication\Controller\User',
-                        'controller'    => 'Index',
+                        'controller'    => 'IndexController',
                         'action'        => 'login-form',
                     ),
                 ),
@@ -31,47 +31,11 @@ return array(
                     'route'    => '/logout',
                     'defaults' => array(
                         '__NAMESPACE__' => 'T4web\Authentication\Controller\User',
-                        'controller'    => 'Index',
+                        'controller'    => 'IndexController',
                         'action'        => 'logout',
                     ),
                 ),
             ),
-        ),
-    ),
-
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'auth-init' => array(
-                    'options' => array(
-                        'route'    => 'auth init',
-                        'defaults' => array(
-                            '__NAMESPACE__' => 'T4web\Authentication\Controller\Console',
-                            'controller' => 'Init',
-                            'action'     => 'run'
-                        )
-                    )
-                ),
-            )
-        )
-    ),
-
-    'db' => array(
-        'tables' => array(
-            't4webauthentication-entry' => array(
-                'name' => 'auth',
-                'columnsAsAttributesMap' => array(
-                    'id' => 'id',
-                    'login' => 'login',
-                    'password' => 'password',
-                ),
-            ),
-        ),
-    ),
-
-    'criteries' => array(
-        'Entry' => array(
-            'empty' => array('table' => 'auth'),
         ),
     ),
 
@@ -88,5 +52,9 @@ return array(
         }
 
         return false;
-    }
+    },
+
+    'auth-accounts' => [
+        'admin' => '111',
+    ],
 );
