@@ -6,7 +6,8 @@ use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Result as AuthResult;
 use Zend\Authentication\Adapter\AdapterInterface;
 
-class Authenticator {
+class Authenticator
+{
 
     /**
      * @var AuthenticationService
@@ -23,12 +24,14 @@ class Authenticator {
      */
     protected $adapter;
 
-    public function __construct(AuthenticationService $authService, AdapterInterface $adapter) {
+    public function __construct(AuthenticationService $authService, AdapterInterface $adapter)
+    {
         $this->authService = $authService;
         $this->adapter = $adapter;
     }
 
-    public function authenticate($username, $password) {
+    public function authenticate($username, $password)
+    {
         $this->adapter->setIdentity($username);
         $this->adapter->setCredential($password);
 
@@ -47,19 +50,23 @@ class Authenticator {
         return true;
     }
 
-    public function getMessages() {
+    public function getMessages()
+    {
         return $this->result->getMessages()[0];
     }
 
-    public function hasIdentity() {
+    public function hasIdentity()
+    {
         return $this->authService->hasIdentity();
     }
 
-    public function getIdentity() {
+    public function getIdentity()
+    {
         return $this->authService->getIdentity();
     }
 
-    public function getUserId() {
+    public function getUserId()
+    {
         $storage = $this->authService->getStorage()->read();
 
         if (!isset($storage['id'])) {
@@ -69,8 +76,8 @@ class Authenticator {
         return $storage['id'];
     }
 
-    public function logout() {
+    public function logout()
+    {
         $this->authService->clearIdentity();
     }
-
 }

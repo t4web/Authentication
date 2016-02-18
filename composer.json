@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
+        "php": "^5.5",
 
         "zendframework/zend-authentication": "^2.5",
         "zendframework/zend-console": "^2.5",
@@ -26,11 +26,26 @@
         "zendframework/zend-view": "^2.5"
     },
     "require-dev" : {
-        "codeception/codeception": "2.*"
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
         "psr-4": {
             "T4web\\Authentication\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "T4web\\AuthenticationTest\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always"
     }
 }

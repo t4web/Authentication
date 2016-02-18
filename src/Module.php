@@ -10,8 +10,11 @@ use Zend\Mvc\Controller\ControllerManager;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventInterface;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
-                        ControllerProviderInterface, BootstrapListenerInterface
+class Module implements
+    AutoloaderProviderInterface,
+    ConfigProviderInterface,
+    ControllerProviderInterface,
+    BootstrapListenerInterface
 {
     public function onBootstrap(EventInterface $e)
     {
@@ -20,7 +23,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
 
         $authChecker = $sm->get(Service\Checker::class);
 
-        $em->attach(MvcEvent::EVENT_ROUTE, array($authChecker, 'check'), -100);
+        $em->attach(MvcEvent::EVENT_ROUTE, [$authChecker, 'check'], -100);
     }
 
     public function getConfig($env = null)
@@ -30,19 +33,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => dirname(__DIR__) . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     public function getControllerConfig()
     {
-        return array(
-            'factories' => array(
+        return [
+            'factories' => [
                 Controller\User\IndexController::class => function (ControllerManager $cm) {
                     $sl = $cm->getServiceLocator();
 
@@ -50,7 +53,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
                         $sl->get(Service\Authenticator::class)
                     );
                 },
-            )
-        );
+            ]
+        ];
     }
 }

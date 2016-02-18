@@ -8,14 +8,16 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\Application;
 
-class Checker {
+class Checker
+{
 
     /**
      * @var AuthenticationService
      */
     protected $authService;
 
-    public function __construct(AuthenticationService $authService) {
+    public function __construct(AuthenticationService $authService)
+    {
         $this->authService = $authService;
     }
 
@@ -51,7 +53,7 @@ class Checker {
 
         // User is authenticated
         if ($this->authService->hasIdentity()) {
-           return;
+            return;
         }
 
         $response = $this->redirectTo($event, 'auth-login');
@@ -63,7 +65,7 @@ class Checker {
     {
         // Redirect to the user login page, as an example
         $router   = $event->getRouter();
-        $url      = $router->assemble(array(), array('name' => $routeName));
+        $url      = $router->assemble([], ['name' => $routeName]);
 
         $response = $event->getResponse();
         $response->getHeaders()->addHeaderLine('Location', $url);
