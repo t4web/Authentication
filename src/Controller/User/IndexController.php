@@ -4,6 +4,7 @@ namespace T4web\Authentication\Controller\User;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\Plugin\Redirect;
 use T4web\Authentication\Service\InteractiveAuth;
 
 class IndexController extends AbstractActionController
@@ -14,18 +15,25 @@ class IndexController extends AbstractActionController
     private $auth;
 
     /**
-     * @param InteractiveAuth $auth
+     * @var Redirect
      */
-    public function __construct(InteractiveAuth $auth)
+    private $redirect;
+
+    /**
+     * @param InteractiveAuth $auth
+     * @param Redirect $redirect
+     */
+    public function __construct(InteractiveAuth $auth, Redirect $redirect)
     {
         $this->auth = $auth;
+        $this->redirect = $redirect;
     }
 
     public function loginFormAction()
     {
-        if ($this->isPost()) {
-            $username = $this->getFromPost('username');
-            $password = $this->getFromPost('password');
+        if ($this->getRequest()->isPost()) {
+            $username = $this->getRequest()->getPost('username');
+            $password = $this->getRequest()->getPost('password');
 
             $result = $this->auth->login($username, $password);
 
@@ -35,23 +43,13 @@ class IndexController extends AbstractActionController
                 return $view;
             }
 
-            return $this->redirect()->toUrl('/');
+            return $this->redirect->toUrl('/');
         }
     }
 
     public function logoutAction()
     {
         $this->auth->logout();
-        return $this->redirect()->toRoute('auth-login');
-    }
-
-    protected function getFromPost($name, $default = null)
-    {
-        return $this->params()->fromPost($name, $default);
-    }
-
-    protected function isPost()
-    {
-        return $this->getRequest()->isPost();
+        return $this->redirect->toRoute('auth-login');
     }
 }
