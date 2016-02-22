@@ -4,15 +4,21 @@ namespace T4web\Authentication\Controller\User;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use T4web\Authentication\Service\Authenticator;
+use T4web\Authentication\Service\InteractiveAuth;
 
 class IndexController extends AbstractActionController
 {
-    private $authService;
+    /**
+     * @var InteractiveAuth
+     */
+    private $auth;
 
-    public function __construct(Authenticator $authService)
+    /**
+     * @param InteractiveAuth $auth
+     */
+    public function __construct(InteractiveAuth $auth)
     {
-        $this->authService = $authService;
+        $this->auth = $auth;
     }
 
     public function loginFormAction()
@@ -21,9 +27,11 @@ class IndexController extends AbstractActionController
             $username = $this->getFromPost('username');
             $password = $this->getFromPost('password');
 
-            if (!$this->authService->authenticate($username, $password)) {
+            $result = $this->auth->login($username, $password);
+
+            if (!$result->isValid()) {
                 $view = new ViewModel();
-                $view->errorMessage = $this->authService->getMessages();
+                $view->errorMessage = $result->getMessages()[0];
                 return $view;
             }
 
@@ -33,7 +41,7 @@ class IndexController extends AbstractActionController
 
     public function logoutAction()
     {
-        $this->authService->logout();
+        $this->auth->logout();
         return $this->redirect()->toRoute('auth-login');
     }
 

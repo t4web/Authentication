@@ -2,30 +2,73 @@
 
 namespace T4web\Authentication\Adapter;
 
-use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Adapter\ValidatableAdapterInterface;
 use Zend\Authentication\Result;
 
-class PhpArray implements AdapterInterface
+class PhpArray implements ValidatableAdapterInterface
 {
+    /**
+     * @var array
+     */
     private $accounts;
+
+    /**
+     * @var string
+     */
     private $identity;
+
+    /**
+     * @var string
+     */
     private $credential;
 
+    /**
+     * @param array $accounts
+     */
     public function __construct(array $accounts)
     {
         $this->accounts = $accounts;
     }
 
+    /**
+     * @return string
+     */
+    public function getIdentity()
+    {
+        return $this->identity;
+    }
+
+    /**
+     * @param string $identity
+     * @return ValidatableAdapterInterface
+     */
     public function setIdentity($identity)
     {
         $this->identity = $identity;
+        return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getCredential()
+    {
+        return $this->credential;
+    }
+
+    /**
+     * @param mixed $credential
+     * @return ValidatableAdapterInterface
+     */
     public function setCredential($credential)
     {
         $this->credential = $credential;
+        return $this;
     }
 
+    /**
+     * @return Result
+     */
     public function authenticate()
     {
         if (!isset($this->accounts[$this->identity])) {

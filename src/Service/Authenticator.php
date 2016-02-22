@@ -5,8 +5,10 @@ namespace T4web\Authentication\Service;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Result as AuthResult;
 use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\EventManager\EventManager;
+use T4web\Authentication\AuthenticationEvent;
 
-class Authenticator
+class Authenticator extends AuthenticationService
 {
 
     /**
@@ -24,30 +26,61 @@ class Authenticator
      */
     protected $adapter;
 
+    /**
+     * @param AuthenticationService $authService
+     * @param AdapterInterface $adapter
+     */
     public function __construct(AuthenticationService $authService, AdapterInterface $adapter)
     {
         $this->authService = $authService;
         $this->adapter = $adapter;
     }
 
-    public function authenticate($username, $password)
+    /**
+     * @param AdapterInterface|null $adapter
+     * @return AuthResult
+     */
+    public function authenticate(AdapterInterface $adapter = null)
     {
-        $this->adapter->setIdentity($username);
-        $this->adapter->setCredential($password);
-
         // Attempt authentication, saving the result
-        /* @var $result AuthResult */
-        $this->result = $this->authService->authenticate($this->adapter);
+//        /* @var $result AuthResult */
+//        $this->result = $this->authService->authenticate($this->adapter);
+//
+//        if (!$this->result->isValid()) {
+//            return false;
+//        }
+//
+//        $this->authService->getStorage()->write(
+//            ['id' => $this->result->getIdentity()]
+//        );
+//
+//        return true;
 
-        if (!$this->result->isValid()) {
-            return false;
+        $event = new AuthenticationEvent();
+        $event->setTarget($this);
+
+        if (!$adapter) {
+            $adapter = $this->getAdapter();
         }
 
-        $this->authService->getStorage()->write(
-            ['id' => $this->result->getIdentity()]
-        );
+        if ($adapter) {
+            $event->setAdapter($adapter);
+        }
 
-        return true;
+        $eventManager = new EventManager();
+        $eventManager->setIdentifiers(get_class($this));
+
+        $eventManager->trigger($event);
+
+        return $event->getResult();
+    }
+
+    /**
+     * @return AdapterInterface
+     */
+    public function getAdapter()
+    {
+        return $this->adapter;
     }
 
     public function getMessages()

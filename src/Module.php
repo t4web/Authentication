@@ -6,7 +6,6 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\Mvc\Controller\ControllerManager;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventInterface;
 
@@ -46,13 +45,7 @@ class Module implements
     {
         return [
             'factories' => [
-                Controller\User\IndexController::class => function (ControllerManager $cm) {
-                    $sl = $cm->getServiceLocator();
 
-                    return new Controller\User\IndexController(
-                        $sl->get(Service\Authenticator::class)
-                    );
-                },
             ]
         ];
     }
