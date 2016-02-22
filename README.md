@@ -1,6 +1,11 @@
 Authentication
 ==============
 
+Master:
+[![Build Status](https://travis-ci.org/t4web/Authentication.svg?branch=master)](https://travis-ci.org/t4web/Authentication)
+[![codecov.io](http://codecov.io/github/t4web/Authentication/coverage.svg?branch=master)](http://codecov.io/github/t4web/Authentication?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/t4web/Authentication/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/t4web/Authentication/?branch=master)
+
 Authentication module for zf2
 
 Introduction
