@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^5.5",
+        "php": "^5.5 || ^7.0",
 
         "zendframework/zend-authentication": "^2.5",
         "zendframework/zend-console": "^2.5",
