@@ -9,7 +9,7 @@ use T4web\Authentication\AuthenticationEvent;
 
 class SessionWriteTest extends \PHPUnit_Framework_TestCase
 {
-    public function testAuthenticate()
+    public function testInvoke()
     {
         $sessionManager = $this->prophesize(SessionManager::class);
         $result = $this->prophesize(Result::class);

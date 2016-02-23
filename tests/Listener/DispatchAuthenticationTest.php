@@ -10,7 +10,7 @@ use T4web\Authentication\AuthenticationEvent;
 
 class DispatchAuthenticationTest extends \PHPUnit_Framework_TestCase
 {
-    public function testAuthenticate()
+    public function testInvoke()
     {
         $authService = $this->prophesize(AuthenticationService::class);
 

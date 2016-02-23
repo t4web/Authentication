@@ -10,7 +10,6 @@ use T4web\Authentication\AuthenticationEvent;
 
 class Authenticator extends AuthenticationService
 {
-
     /**
      * @var AuthenticationService
      */
@@ -46,7 +45,7 @@ class Authenticator extends AuthenticationService
         $event->setTarget($this);
 
         if (!$adapter) {
-            $adapter = $this->getAdapter();
+            $adapter = $this->adapter;
         }
 
         if ($adapter) {
