@@ -31,20 +31,22 @@ class IndexController extends AbstractActionController
 
     public function loginFormAction()
     {
-        if ($this->getRequest()->isPost()) {
-            $username = $this->getRequest()->getPost('username');
-            $password = $this->getRequest()->getPost('password');
-
-            $result = $this->auth->login($username, $password);
-
-            if (!$result->isValid()) {
-                $view = new ViewModel();
-                $view->errorMessage = $result->getMessages()[0];
-                return $view;
-            }
-
-            return $this->redirect->toUrl('/');
+        if (!$this->getRequest()->isPost()) {
+            return;
         }
+
+        $username = $this->getRequest()->getPost('username');
+        $password = $this->getRequest()->getPost('password');
+
+        $result = $this->auth->login($username, $password);
+
+        if (!$result->isValid()) {
+            $view = new ViewModel();
+            $view->errorMessage = $result->getMessages()[0];
+            return $view;
+        }
+
+        return $this->redirect->toUrl('/');
     }
 
     public function logoutAction()

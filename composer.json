@@ -20,6 +20,7 @@
         "zendframework/zend-authentication": "^2.5",
         "zendframework/zend-console": "^2.5",
         "zendframework/zend-eventmanager": "^2.5",
+        "zendframework/zend-http": "^2.5",
         "zendframework/zend-modulemanager": "^2.5",
         "zendframework/zend-mvc": "^2.5",
         "zendframework/zend-servicemanager": "^2.5",
