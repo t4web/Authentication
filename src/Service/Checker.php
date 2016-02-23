@@ -10,7 +10,6 @@ use Zend\Mvc\Application;
 
 class Checker
 {
-
     /**
      * @var AuthenticationService
      */
@@ -67,6 +66,7 @@ class Checker
         $router   = $event->getRouter();
         $url      = $router->assemble([], ['name' => $routeName]);
 
+        /** @var \Zend\Http\Response $response */
         $response = $event->getResponse();
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
