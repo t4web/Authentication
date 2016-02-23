@@ -21,7 +21,7 @@ class Checker
         $this->authService = $authService;
     }
 
-    public function check(MvcEvent $event)
+    public function __invoke(MvcEvent $event)
     {
         if ($event->getRequest() instanceof ConsoleRequest) {
             return;

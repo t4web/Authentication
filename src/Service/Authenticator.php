@@ -42,20 +42,6 @@ class Authenticator extends AuthenticationService
      */
     public function authenticate(AdapterInterface $adapter = null)
     {
-        // Attempt authentication, saving the result
-//        /* @var $result AuthResult */
-//        $this->result = $this->authService->authenticate($this->adapter);
-//
-//        if (!$this->result->isValid()) {
-//            return false;
-//        }
-//
-//        $this->authService->getStorage()->write(
-//            ['id' => $this->result->getIdentity()]
-//        );
-//
-//        return true;
-
         $event = new AuthenticationEvent();
         $event->setTarget($this);
 
@@ -83,30 +69,9 @@ class Authenticator extends AuthenticationService
         return $this->adapter;
     }
 
-    public function getMessages()
-    {
-        return $this->result->getMessages()[0];
-    }
-
     public function hasIdentity()
     {
         return $this->authService->hasIdentity();
-    }
-
-    public function getIdentity()
-    {
-        return $this->authService->getIdentity();
-    }
-
-    public function getUserId()
-    {
-        $storage = $this->authService->getStorage()->read();
-
-        if (!isset($storage['id'])) {
-            return false;
-        }
-
-        return $storage['id'];
     }
 
     public function logout()
