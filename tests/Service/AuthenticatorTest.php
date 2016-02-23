@@ -49,16 +49,4 @@ class AuthenticatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($result);
     }
-
-    public function testLogout()
-    {
-        $authService = $this->prophesize(AuthenticationService::class);
-        $adapter = $this->prophesize(AdapterInterface::class);
-
-        $authenticator = new Authenticator($authService->reveal(), $adapter->reveal());
-
-        $authService->clearIdentity()->willReturn(null);
-
-        $authenticator->logout();
-    }
 }

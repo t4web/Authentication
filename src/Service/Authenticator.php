@@ -72,9 +72,4 @@ class Authenticator extends AuthenticationService
     {
         return $this->authService->hasIdentity();
     }
-
-    public function logout()
-    {
-        $this->authService->clearIdentity();
-    }
 }
