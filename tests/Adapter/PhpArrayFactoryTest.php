@@ -21,7 +21,7 @@ class PhpArrayFactoryTest extends \PHPUnit_Framework_TestCase
         $this->serviceLocator->get('Config')->willReturn($config);
     }
 
-    public function testAuthenticate()
+    public function testCreateService()
     {
         $factory = new PhpArrayFactory();
 
