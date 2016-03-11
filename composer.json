@@ -28,7 +28,7 @@
         "zendframework/zend-view": "^2.5",
 
         "t4web/session": "^1.0",
-        "t4web/event-subscriber": "^0.0"
+        "t4web/event-subscriber": "~1.0.0"
     },
     "require-dev" : {
         "phpunit/phpunit": "^4.8",
