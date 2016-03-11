@@ -1,5 +1,7 @@
 <?php
 
+namespace T4web\Authentication;
+
 use Zend\Mvc\Router\RouteMatch;
 
 return array(
@@ -12,6 +14,9 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+        'template_map' => array(
+            't4web/index/login-form' => __DIR__ . '/../view/t4web/controller/user/index/login-form.phtml',
+        ),
     ),
 
     'router' => array(
@@ -21,8 +26,7 @@ return array(
                 'options' => array(
                     'route'    => '/login-form',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'T4web\Authentication\Controller\User',
-                        'controller'    => 'IndexController',
+                        'controller'    => Controller\User\IndexController::class,
                         'action'        => 'login-form',
                     ),
                 ),
@@ -32,8 +36,7 @@ return array(
                 'options' => array(
                     'route'    => '/logout',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'T4web\Authentication\Controller\User',
-                        'controller'    => 'IndexController',
+                        'controller'    => Controller\User\IndexController::class,
                         'action'        => 'logout',
                     ),
                 ),
