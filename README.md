@@ -17,7 +17,7 @@ Requirements
 
 Features / Goals
 ----------------
-* Authenticate via username, email, or both [IN PROGRESS]
+* Authenticate via username, email, or both
 
 Installation
 ------------
@@ -58,6 +58,41 @@ return array(
 );
 ```
 
+Configuring
+------------
+For define which page need authorization, you can redeclare `need-authorization-callback`, by default:
+
+```php
+'need-authorization-callback' => function(RouteMatch $match) {
+    $name = $match->getMatchedRouteName();
+
+    if ($name == 'auth-login') {
+        return false;
+    }
+
+    if (strpos($name, 'admin') !== false) {
+        return true;
+    }
+
+    return false;
+},
+```
+
+For change auth login form layout you can define `layout` route param:
+```php
+'router' => array(
+    'routes' => array(
+        'auth-login' => array(
+            'options' => array(
+                'defaults' => array(
+                    'layout' => 'layout/my_auth_layout',
+                ),
+            ),
+        ),
+    ),
+),
+```
+
 Testing
 ------------
 Unit test runnig from authentication module directory.
@@ -77,6 +112,7 @@ settings:
     memory_limit: 1024M
 ```
 After this you may run functional tests from your project root
+
 ```bash
 $ codeception run
 ```
