@@ -14,9 +14,6 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
-        'template_map' => array(
-            't4web/index/login-form' => __DIR__ . '/../view/t4web/controller/user/index/login-form.phtml',
-        ),
     ),
 
     'router' => array(
