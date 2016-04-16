@@ -19,8 +19,6 @@ class IndexControllerFactory implements FactoryInterface
     {
         $sl = $cm->getServiceLocator();
 
-        $plugins = $sl->get('ControllerPluginManager');
-
         /** @var Application $app */
         $app = $sl->get('Application');
         $event = $app->getMvcEvent();
@@ -33,12 +31,20 @@ class IndexControllerFactory implements FactoryInterface
             $viewModel->setTemplate($routeMatch->getParam('layout'));
         }
 
+        $redirectToUrl = '/';
+        if ($routeMatch->getParam('redirect-to-url')) {
+            $redirectToUrl = $routeMatch->getParam('redirect-to-url');
+        }
+
+        $plugins = $sl->get('ControllerPluginManager');
+
         /** @var Redirect $redirect */
         $redirect = $plugins->get('redirect');
 
         $controller = new IndexController(
             $sl->get(InteractiveAuth::class),
-            $redirect
+            $redirect,
+            $redirectToUrl
         );
 
         $redirect->setController($controller);

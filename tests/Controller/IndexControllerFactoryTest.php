@@ -40,6 +40,8 @@ class IndexControllerFactoryTest extends \PHPUnit_Framework_TestCase
         $viewModel = $this->prophesize(ViewModel::class);
         $event->getViewModel()->willReturn($viewModel);
 
+        $routeMatch->getParam('redirect-to-url')->willReturn('/some/uri');
+
         $viewModel->setTemplate('some/layout')->willReturn(null);
 
         $redirect = $this->prophesize(Redirect::class);
@@ -55,5 +57,6 @@ class IndexControllerFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($controller instanceof IndexController);
         $this->assertAttributeSame($auth->reveal(), 'auth', $controller);
         $this->assertAttributeSame($redirect->reveal(), 'redirect', $controller);
+        $this->assertAttributeSame('/some/uri', 'redirectToUrl', $controller);
     }
 }

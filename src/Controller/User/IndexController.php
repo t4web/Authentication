@@ -20,13 +20,26 @@ class IndexController extends AbstractActionController
     private $redirect;
 
     /**
-     * @param InteractiveAuth $auth
-     * @param Redirect $redirect
+     * @var string
      */
-    public function __construct(InteractiveAuth $auth, Redirect $redirect)
+    private $redirectToUrl;
+
+    /**
+     * IndexController constructor.
+     *
+     * @param InteractiveAuth $auth
+     * @param Redirect        $redirect
+     * @param string          $redirectToUrl
+     */
+    public function __construct(
+        InteractiveAuth $auth,
+        Redirect $redirect,
+        $redirectToUrl = '/'
+    )
     {
         $this->auth = $auth;
         $this->redirect = $redirect;
+        $this->redirectToUrl = $redirectToUrl;
     }
 
     public function loginFormAction()
@@ -46,7 +59,7 @@ class IndexController extends AbstractActionController
             return $view;
         }
 
-        return $this->redirect->toUrl('/');
+        return $this->redirect->toUrl($this->redirectToUrl);
     }
 
     public function logoutAction()

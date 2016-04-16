@@ -78,7 +78,8 @@ For define which page need authorization, you can redeclare `need-authorization-
 },
 ```
 
-For change auth login form layout you can define `layout` route param:
+For change auth login form layout you can define `layout` route param, for change
+redirect uri after success authorization, you can define `redirect-to-url` route param:
 ```php
 'router' => array(
     'routes' => array(
@@ -86,6 +87,7 @@ For change auth login form layout you can define `layout` route param:
             'options' => array(
                 'defaults' => array(
                     'layout' => 'layout/my_auth_layout',
+                    'redirect-to-url' => '/some/uri',
                 ),
             ),
         ),
