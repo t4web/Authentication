@@ -39,7 +39,7 @@ class Checker
 
         $disableForAuthorizedCallback = $config['authorized-redirect-to-route'];
         $redirectTo = $disableForAuthorizedCallback($match, $this->authService);
-        if (!empty($redirectTo)) {
+        if ($this->authService->hasIdentity() && !empty($redirectTo)) {
             $response = $this->redirectTo($event, $redirectTo);
             return $response;
         }
