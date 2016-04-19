@@ -56,6 +56,14 @@ return array(
         return false;
     },
 
+    'authorized-redirect-to-route' => function(RouteMatch $match) {
+        $name = $match->getMatchedRouteName();
+
+        if ($name == 'auth-login') {
+            return 'home';
+        }
+    },
+
     'auth-accounts' => [
         'admin' => '111',
     ],

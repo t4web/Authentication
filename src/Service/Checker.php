@@ -33,15 +33,16 @@ class Checker
             return;
         }
 
-        if ($match->getMatchedRouteName() == 'auth-login' && $this->authService->hasIdentity()) {
-            $response = $this->redirectTo($event, 'home');
-
-            return $response;
-        }
-
         /** @var Application $app */
         $app = $event->getParam('application');
         $config = $app->getConfig();
+
+        $disableForAuthorizedCallback = $config['authorized-redirect-to-route'];
+        $redirectTo = $disableForAuthorizedCallback($match, $this->authService);
+        if (!empty($redirectTo)) {
+            $response = $this->redirectTo($event, $redirectTo);
+            return $response;
+        }
 
         $checkCallback = $config['need-authorization-callback'];
 

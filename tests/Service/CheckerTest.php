@@ -60,6 +60,17 @@ class CheckerTest extends \PHPUnit_Framework_TestCase
 
         $routeMatch->getMatchedRouteName()->willReturn('auth-login');
 
+        $app = $this->prophesize(Application::class);
+        $this->event->getParam('application')->willReturn($app->reveal());
+
+        $app->getConfig()->willReturn([
+            'authorized-redirect-to-route' => function ($match, $authService) use ($routeMatch) {
+                $this->assertSame($routeMatch->reveal(), $match);
+                $this->assertSame($this->authService->reveal(), $authService);
+                return 'home';
+            }
+        ]);
+
         $response = new Response();
         $this->event->getResponse()->willReturn($response);
 
@@ -87,7 +98,8 @@ class CheckerTest extends \PHPUnit_Framework_TestCase
                 $this->assertSame($routeMatch->reveal(), $match);
                 $this->assertSame($this->authService->reveal(), $authService);
                 return;
-            }
+            },
+            'authorized-redirect-to-route' => function ($match, $authService) use ($routeMatch) {}
         ]);
 
         $result = $this->checker->__invoke($this->event->reveal());
@@ -116,7 +128,8 @@ class CheckerTest extends \PHPUnit_Framework_TestCase
                 $this->assertSame($routeMatch->reveal(), $match);
                 $this->assertSame($this->authService->reveal(), $authService);
                 return true;
-            }
+            },
+            'authorized-redirect-to-route' => function ($match, $authService) use ($routeMatch) {}
         ]);
 
         $response = new Response();
