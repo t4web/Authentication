@@ -8,16 +8,16 @@ Master:
 
 Authentication module for zf2
 
+## Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Configuring](#configuring)
+- [Adapters](#adapters)
+- [Testing](#testing)
+
 Introduction
 ------------
-
-Requirements
-------------
-* [Zend Framework 2](https://github.com/zendframework/zf2) (latest master)
-
-Features / Goals
-----------------
-* Authenticate via username, email, or both
+Very simple authentication from the Box - define accounts config with login and password and use.
 
 Installation
 ------------
@@ -106,6 +106,45 @@ By default auth use php array for auth storage, but you can write own:
 
 `Adapter\MyAdapter` must implement `Zend\Authentication\Adapter\ValidatableAdapterInterface`.
 
+Adapters
+------------
+This module contain two adapters in the Box `PhpArray` and `Table`.
+
+### PhpArray adapter
+
+This adapter use by [default](https://github.com/t4web/Authentication/blob/master/config/service_manager.config.php#L10).
+For define logins and passwords just describe it in you config in `auth-accounts` section:
+
+```php
+'auth-accounts' => [
+    'someUser1' => 'str0ngp@ssw0rd',
+    'someUser2' => '111',
+],
+```
+
+### Table adapter
+
+This is wrapper for `Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter`, for start use, define it in your config:
+
+```php
+'service_manager' => [
+    'factories' => [
+        Zend\Authentication\Adapter\AdapterInterface::class => \T4web\Authentication\Adapter\TableFactory::class,
+    ]
+],
+```
+
+and describe `auth['table-adapter']` config:
+
+```php
+'auth' => [
+    'table-adapter' => [
+        'table-name' => 'users',
+        'identity-column' => 'email',
+        'credential-column' => 'password',
+    ],
+],
+```
 
 Testing
 ------------

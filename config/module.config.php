@@ -64,7 +64,17 @@ return array(
         }
     },
 
+    // for php array adapter
     'auth-accounts' => [
         'admin' => '111',
+    ],
+
+    // for table adapter
+    'auth' => [
+        'table-adapter' => [
+            'table-name' => 'users',
+            'identity-column' => 'email',
+            'credential-column' => 'password',
+        ],
     ],
 );
