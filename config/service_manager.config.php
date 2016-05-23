@@ -15,7 +15,7 @@ return [
         Listener\DispatchAuthentication::class => Listener\DispatchAuthenticationFactory::class,
         Listener\SessionWrite::class => Listener\SessionWriteFactory::class,
     ],
-     'aliases' => [
+    'aliases' => [
         AuthenticationService::class => Service\Authenticator::class,
     ],
 ];
