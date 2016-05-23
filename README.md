@@ -95,6 +95,18 @@ redirect uri after success authorization, you can define `redirect-to-url` route
 ),
 ```
 
+By default auth use php array for auth storage, but you can write own:
+```php
+'service_manager' => [
+    'factories' => [
+        Zend\Authentication\Adapter\AdapterInterface::class => Adapter\MyAdapter::class,
+    ]
+]
+```
+
+`Adapter\MyAdapter` must implement `Zend\Authentication\Adapter\ValidatableAdapterInterface`.
+
+
 Testing
 ------------
 Unit test runnig from authentication module directory.
