@@ -50,6 +50,12 @@ class IndexController extends AbstractActionController
 
         $username = $this->getRequest()->getPost('username');
         $password = $this->getRequest()->getPost('password');
+        
+        if (empty($username) || empty($password)) {
+            $view = new ViewModel();
+            $view->errorMessage = 'User name or pass cannot be empty.';
+            return $view;
+        }
 
         $result = $this->auth->login($username, $password);
 
