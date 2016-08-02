@@ -71,6 +71,6 @@ class IndexController extends AbstractActionController
     public function logoutAction()
     {
         $this->auth->logout();
-        return $this->redirect->toRoute($this->redirectToUrl);
+        return $this->redirect->toUrl($this->redirectToUrl);
     }
 }
