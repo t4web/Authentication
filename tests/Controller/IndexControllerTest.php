@@ -93,7 +93,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->auth->logout()->willReturn(null);
         $response = $this->prophesize(Response::class);
-        $this->redirect->toRoute('auth-login')->willReturn($response->reveal());
+        $this->redirect->toUrl('/')->willReturn($response->reveal());
 
         $res = $this->controller->logoutAction();
 
