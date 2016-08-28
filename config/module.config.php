@@ -64,6 +64,8 @@ return array(
         }
     },
 
+    'not-authorized-redirect-to-route' => 'auth-login',
+
     // for php array adapter
     'auth-accounts' => [
         'admin' => '111',

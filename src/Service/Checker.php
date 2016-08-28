@@ -56,7 +56,7 @@ class Checker
             return;
         }
 
-        $response = $this->redirectTo($event, 'auth-login');
+        $response = $this->redirectTo($event, $config['not-authorized-redirect-to-route']);
 
         return $response;
     }
