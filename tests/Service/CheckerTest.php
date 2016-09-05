@@ -129,7 +129,8 @@ class CheckerTest extends \PHPUnit_Framework_TestCase
                 $this->assertSame($this->authService->reveal(), $authService);
                 return true;
             },
-            'authorized-redirect-to-route' => function ($match, $authService) use ($routeMatch) {}
+            'authorized-redirect-to-route' => function ($match, $authService) use ($routeMatch) {},
+            'not-authorized-redirect-to-route' => 'home'
         ]);
 
         $response = new Response();
